@@ -1,0 +1,9 @@
+Mandatory
+=========
+* insert script
+* drop script
+* functionality queries
+
+Extra
+=====
+* Add extra restrictions, e.g. rating: at least one of comment or score not null.

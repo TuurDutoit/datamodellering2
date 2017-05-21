@@ -1,0 +1,15 @@
+DROP TABLE verlof;
+DROP TABLE contract_type;
+DROP TABLE contract;
+DROP TABLE service_area;
+DROP TABLE klant;
+DROP TABLE project;
+DROP TABLE fase_type;
+DROP TABLE fase;
+DROP TABLE taak;
+DROP TABLE rating;
+DROP TABLE materiaal;
+DROP TABLE verbruik;
+DROP TABLE locatie;
+DROP TABLE uren;
+DROP TABLE medewerker;
