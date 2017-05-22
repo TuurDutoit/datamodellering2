@@ -1,9 +1,10 @@
 Mandatory
 =========
-* insert script
-* drop script
 * functionality queries
+* Make fields more descriptive, e.g. 'taak_id' instead of 'id'?
 
 Extra
 =====
-* Add extra restrictions, e.g. rating: at least one of comment or score not null.
+* Add extra restrictions, e.g.:
+  - rating: at least one of comment or score not null.
+  - rating: 0 <= score <= 10

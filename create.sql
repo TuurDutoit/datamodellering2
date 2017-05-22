@@ -4,7 +4,7 @@ CREATE TABLE medewerker (
     email varchar(45),
     telefoon varchar(20),
     adres varchar(100),
-    service_area_naam varchar(45) NOT NULL
+    service_area_naam varchar(45)
 );
 
 
@@ -39,7 +39,7 @@ CREATE TABLE verlof (
     CONSTRAINT fk_medewerker_id
       FOREIGN KEY (medewerker_id)
       REFERENCES medewerker (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE
 );
 
@@ -53,14 +53,14 @@ CREATE TABLE contract (
     id serial PRIMARY KEY,
     van timestamp NOT NULL,
     tot timestamp NOT NULL,
-    uurloon integer NOT NULL,
+    uurloon real NOT NULL,
     medewerker_id integer NOT NULL,
     contract_type_naam varchar(45) NOT NULL,
     
     CONSTRAINT fk_medewerker_id
       FOREIGN KEY (medewerker_id)
       REFERENCES medewerker (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE,
     
     CONSTRAINT fk_contract_type_naam
@@ -84,7 +84,7 @@ CREATE TABLE project (
     id serial PRIMARY KEY,
     naam varchar(45) NOT NULL,
     beschrijving text DEFAULT '',
-    prijs integer,
+    prijs real,
     klant_id integer,
     
     CONSTRAINT fk_klant_id
@@ -104,7 +104,7 @@ CREATE TABLE fase (
     CONSTRAINT fk_project_id
       FOREIGN KEY (project_id)
       REFERENCES project (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE
 );
 
@@ -119,7 +119,7 @@ CREATE TABLE taak (
     CONSTRAINT fk_fase_id
       FOREIGN KEY (fase_id)
       REFERENCES fase (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE
 );
 
@@ -136,7 +136,7 @@ CREATE TABLE rating (
     CONSTRAINT fk_taak_id
       FOREIGN KEY (taak_id)
       REFERENCES taak (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE,
     
     CONSTRAINT fk_klant_id
@@ -148,7 +148,7 @@ CREATE TABLE rating (
     CONSTRAINT fk_medewerker_id
       FOREIGN KEY (medewerker_id)
       REFERENCES medewerker (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE
 );
 
@@ -169,13 +169,13 @@ CREATE TABLE uren (
     CONSTRAINT fk_medewerker_id
       FOREIGN KEY (medewerker_id)
       REFERENCES medewerker (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE,
     
     CONSTRAINT fk_taak_id
       FOREIGN KEY (taak_id)
       REFERENCES taak (id)
-      ON DELETE CASCADE
+      ON DELETE RESTRICT
       ON UPDATE CASCADE,
     
     CONSTRAINT fk_locatie_naam
@@ -195,7 +195,8 @@ CREATE TABLE materiaal (
 
 CREATE TABLE verbruik (
   id serial PRIMARY KEY,
-  materiaal_id integer NOt NULL,
+  aantal integer NOT NULL,
+  materiaal_id integer NOT NULL,
   taak_id integer NOT NULL,
   
   CONSTRAINT fk_materiaal_id
@@ -207,6 +208,6 @@ CREATE TABLE verbruik (
   CONSTRAINT fk_taak_id
     FOREIGN KEY (taak_id)
     REFERENCES taak (id)
-    ON DELETE CASCADE
+    ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
