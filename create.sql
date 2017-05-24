@@ -1,10 +1,17 @@
+CREATE SCHEMA groep3;
+GRANT ALL ON SCHEMA groep3 TO "r0664285";
+GRANT ALL ON SCHEMA groep3 TO "r0667009";
+GRANT ALL ON SCHEMA groep3 TO "r0668325";
+SET SEARCH_PATH TO "groep3";
+
+
 CREATE TABLE medewerker (
     id serial PRIMARY KEY,
     naam varchar(45) NOT NULL,
     email varchar(45),
     telefoon varchar(20),
     adres varchar(100),
-    service_area_naam varchar(45)
+    service_area_naam varchar(45)     -- Leaving one of two mutual FKs nullable, to be able to insert data
 );
 
 
@@ -30,8 +37,8 @@ ALTER TABLE medewerker
 
 CREATE TABLE verlof (
     id serial PRIMARY KEY,
-    van timestamp NOT NULL,
-    tot timestamp NOT NULL,
+    van timestamp NOT NULL,  -- medewerkers kunnen een paar uur verlof nemen,
+    tot timestamp NOT NULL,  -- dus tijd is ook nodig
     betaald boolean NOT NULL,
     goedgekeurd boolean DEFAULT false,
     medewerker_id integer NOT NULL,
@@ -84,8 +91,7 @@ CREATE TABLE project (
     id serial PRIMARY KEY,
     naam varchar(45) NOT NULL,
     beschrijving text DEFAULT '',
-    prijs real,
-    klant_id integer,
+    klant_id integer,  -- NULL when internal project
     
     CONSTRAINT fk_klant_id
       FOREIGN KEY (klant_id)
@@ -114,6 +120,7 @@ CREATE TABLE taak (
     naam varchar(45) NOT NULL,
     beschrijving text DEFAULT '',
     gedaan boolean DEFAULT false,
+    prijs real DEFAULT 0,
     fase_id integer NOT NULL,
     
     CONSTRAINT fk_fase_id
@@ -130,8 +137,8 @@ CREATE TABLE rating (
     comment text,
     datum timestamp NOT NULL,
     taak_id integer NOT NULL,
-    klant_id integer,
-    medewerker_id integer,
+    klant_id integer,      -- Ofwel van een klant,
+    medewerker_id integer, -- ofwel van een medewerker
     
     CONSTRAINT fk_taak_id
       FOREIGN KEY (taak_id)
@@ -154,7 +161,8 @@ CREATE TABLE rating (
 
 
 CREATE TABLE locatie (
-    naam varchar(45) PRIMARY KEY NOT NULL
+    naam varchar(45) PRIMARY KEY NOT NULL,
+    adres varchar(100)
 );
 
 
@@ -189,7 +197,7 @@ CREATE TABLE uren (
 CREATE TABLE materiaal (
   id serial PRIMARY KEY,
   naam varchar(45) NOT NULL,
-  prijs_per_stuk integer NOT NULL
+  prijs_per_stuk real NOT NULL
 );
 
 
@@ -211,3 +219,10 @@ CREATE TABLE verbruik (
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
+
+
+
+
+GRANT ALL ON ALL TABLES IN SCHEMA "groep3" TO "r0668325";
+GRANT ALL ON ALL TABLES IN SCHEMA "groep3" TO "r0667009";
+GRANT ALL ON ALL TABLES IN SCHEMA "groep3" TO "r0664285";

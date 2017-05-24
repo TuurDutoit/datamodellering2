@@ -26,7 +26,8 @@ UPDATE medewerker SET service_area_naam = 'Management' WHERE id = 2;
 INSERT INTO verlof (van, tot, betaald, goedgekeurd, medewerker_id) VALUES
 	('2007-10-31 10:00:00', '2007-11-1 10:00:00',  true,  false,  1),
   ('2007-09-18 10:00:00', '2008-07-20 10:00:00', true,  true,   2),
-  ('2005-02-12 10:00:00', '2005-04-18 10:00:00', false, true,   3);
+  ('2005-02-12 10:00:00', '2005-04-18 10:00:00', false, true,   3),
+  ('2017-05-13 10:00:00', '2017-05-23 10:00:00', true,  true,   1);
 
 
 INSERT INTO contract_type (naam) VALUES
@@ -53,10 +54,10 @@ INSERT INTO klant (id, naam, email, telefoon, adres) VALUES
 	(6, 'Dubois' ,  'dubois@gmail.com',    '027444496', 'Motbroekstraat 10');
 
 
-INSERT INTO project (id, naam, beschrijving, prijs, klant_id) VALUES
-  (1, 'Project 1', 'Een project voor Stevens', 999.5,     1),
-  (2, 'Project 2', 'Een ander project',        1999,      2),
-  (3, 'Project 3', 'Intern project',           1570599,   NULL);
+INSERT INTO project (id, naam, beschrijving, klant_id) VALUES
+  (1, 'Project 1', 'Een project voor Stevens', 1),
+  (2, 'Project 2', 'Een ander project',        2),
+  (3, 'Project 3', 'Intern project',           NULL);
 
 
 INSERT INTO fase (id, naam, beschrijving, project_id) VALUES
@@ -66,13 +67,13 @@ INSERT INTO fase (id, naam, beschrijving, project_id) VALUES
   (4, 'Default', NULL,                                                      3);
 
 
-INSERT INTO taak (id, gedaan, naam, beschrijving, fase_id) VALUES
-	(1, true,  'Taak 1',    'Project 1 Fase 1 Taak 1', 1),
-	(2, true,  'Taak 2',    'Project 1 Fase 1 Taak 2', 1),
-  (3, true,  'Evaluatie', 'Project 1 Fase 2 Taak 1', 2),
-  (4, false, 'Taak 3',    'Project 1 Fase 2 Taak 2', 2),
-  (5, false, 'Start',     NULL,                      3),
-  (6, true,  'Antivirus', 'Installatie Avast',       4);
+INSERT INTO taak (id, gedaan, naam, beschrijving, fase_id, prijs) VALUES
+	(1, true,  'Taak 1',    'Project 1 Fase 1 Taak 1', 1, 99),
+	(2, true,  'Taak 2',    'Project 1 Fase 1 Taak 2', 1, 0),
+  (3, true,  'Evaluatie', 'Project 1 Fase 2 Taak 1', 2, NULL),
+  (4, false, 'Taak 3',    'Project 1 Fase 2 Taak 2', 2, 476.95),
+  (5, false, 'Start',     NULL,                      3, 0),
+  (6, true,  'Antivirus', 'Installatie Avast',       4, 0);
 
 
 INSERT INTO rating (score, comment, datum, taak_id, klant_id, medewerker_id) VALUES
@@ -94,7 +95,8 @@ INSERT INTO uren (van, tot, medewerker_id, taak_id, locatie_naam) VALUES
   ('2007-10-25 13:00:00', '2007-10-25 18:00:00', 1, 1, 'Zetel Brussel'),
   ('2007-10-25 10:00:00', '2007-10-25 17:00:00', 3, 2, 'Zetel Brussel'),
   ('2009-08-01 09:00:00', '2009-08-01 12:30:00', 2, 3, 'Home Office'),
-  ('2009-10-25 10:00:00', '2009-10-25 11:00:00', 3, 4, 'Home Office');
+  ('2009-10-25 10:00:00', '2009-10-25 11:00:00', 3, 4, 'Home Office'),
+  ('2009-11-07 10:00:00', '2009-11-07 17:00:00', 4, 3, NULL);
 
 
 INSERT INTO materiaal (id, naam, prijs_per_stuk) VALUES 
@@ -106,7 +108,8 @@ INSERT INTO materiaal (id, naam, prijs_per_stuk) VALUES
 INSERT INTO verbruik (aantal, materiaal_id, taak_id) VALUES
   (5, 1, 2),
   (145, 2, 3),
-  (145, 3, 4),
+  (145, 3, 3),
+  (145, 1, 3),
   (1, 3, 6);
 
 

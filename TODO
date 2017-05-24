@@ -1,10 +1,16 @@
 Mandatory
 =========
-* functionality queries
-* Make fields more descriptive, e.g. 'taak_id' instead of 'id'?
+* medewerker - service_area: DEFERRABLE?
 
 Extra
 =====
 * Add extra restrictions, e.g.:
   - rating: at least one of comment or score not null.
   - rating: 0 <= score <= 10
+* Make fields more descriptive, e.g. 'taak_id' instead of 'id'?
+
+Checks
+======
+* Functionality.docx matches functionality.sql
+* File extensions are .txt, not .sql
+* Create.sql contains CREATE SCHEMA, GRANT, SET SEARCH_PATH etc.

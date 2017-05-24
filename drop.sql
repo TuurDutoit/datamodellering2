@@ -13,3 +13,4 @@ DROP TABLE verlof;
 ALTER TABLE medewerker DROP CONSTRAINT fk_service_area_naam;
 DROP TABLE service_area;
 DROP TABLE medewerker;
+DROP SCHEMA groep3;
